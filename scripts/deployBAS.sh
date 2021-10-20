@@ -6,6 +6,7 @@ storageClassDB="$3"
 storageClassKafka="$4" 
 storageClassZookeeper="$5" 
 
+CHARTS_DIR=$(cd $(dirname $0)/../charts; pwd -P)
 
 ####Keeping the values of below properties to default is advised.
 storageSizeKafka=20G
@@ -45,26 +46,26 @@ kubectl create namespace ${PROJECTNAME}
 sleep 10s
 
 #create operator group
-cat <<'EOF'>bas-og.yaml
+cat <<'EOF'>${CHARTS_DIR}/bas-og.yaml
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: bas-operator-group
-  namespace: "${PROJECTNAME}" 
+  namespace: ${PROJECTNAME} 
 spec: 
   targetNamespaces:
-  - "${PROJECTNAME}"
+  - ${PROJECTNAME}
 EOF
 
-kubectl create -f bas-og.yaml 
+kubectl create -f ${CHARTS_DIR}/bas-og.yaml 
 
 #create a Subscription object
-cat <<'EOF'>bas-subscription.yaml
+cat <<'EOF'>${CHARTS_DIR}/bas-subscription.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: behavior-analytics-services-operator-certified
-  namespace: "${PROJECTNAME}"
+  namespace: ${PROJECTNAME}
 spec:
   channel: alpha
   installPlanApproval: Automatic
@@ -74,14 +75,14 @@ spec:
   startingCSV: behavior-analytics-services-operator.${basVersion}
 EOF
 
-kubectl create -f bas-subscription.yaml
+kubectl create -f ${CHARTS_DIR}/bas-subscription.yaml
 
 #Create a secret named database-credentials for PostgreSQL DB and grafana-credentials for Grafana
 kubectl create secret generic database-credentials --from-literal=db_username=${dbuser} --from-literal=db_password=${dbpassword} -n ${PROJECTNAME} 
 kubectl create secret generic grafana-credentials --from-literal=grafana_username=${grafanauser} --from-literal=grafana_password=${grafanapassword} -n ${PROJECTNAME}
 
 #Create the AnalyticsProxy instance
-cat <<'EOF'>analytics-proxy.yaml
+cat <<'EOF'>${CHARTS_DIR}/analytics-proxy.yaml
 apiVersion: bas.ibm.com/v1
 kind: AnalyticsProxy
 metadata:
@@ -92,32 +93,32 @@ spec:
     frequency: '@monthly'
     retention_age: 6
     persistent_storage:
-      storage_class: "${storageClassArchive}"
-      storage_size: "${storageSizeArchive}"
+      storage_class: ${storageClassArchive}
+      storage_size: ${storageSizeArchive}
   airgapped:
     enabled: ${airgappedEnabled}
     backup_deletion_frequency: '@daily'
     backup_retention_period: 7
-  event_scheduler_frequency: "${eventSchedulerFrequency}"
-  ibmproxyurl: "${ibmproxyurl}"
-  image_pull_secret: "${imagePullSecret}"
+  event_scheduler_frequency: ${eventSchedulerFrequency}
+  ibmproxyurl: ${ibmproxyurl}
+  image_pull_secret: ${imagePullSecret}
   postgres:
     storage_class: ${storageClassDB}
     storage_size: ${storageSizeDB}
   kafka:
-    storage_class: "${storageClassKafka}"
-    storage_size: "${storageSizeKafka}"
-    zookeeper_storage_class: "${storageClassZookeeper}"
-    zookeeper_storage_size: "${storageSizeZookeeper}"
-  env_type: "${envType}"
+    storage_class: ${storageClassKafka}
+    storage_size: ${storageSizeKafka}
+    zookeeper_storage_class: ${storageClassZookeeper}
+    zookeeper_storage_size: ${storageSizeZookeeper}
+  env_type: ${envType}
 EOF
 
-kubectl create -f analytics-proxy.yaml
+kubectl create -f ${CHARTS_DIR}/analytics-proxy.yaml
 #Sleep for 5 mins for the deployment
 sleep 5m
 
 #Generate an API Key to use it for authentication
-cat <<'EOF'>api-key.yaml
+cat <<'EOF'>${CHARTS_DIR}/api-key.yaml
 apiVersion: bas.ibm.com/v1
 kind: GenerateKey
 metadata:
@@ -126,14 +127,14 @@ spec:
   image_pull_secret: bas-images-pull-secret
 EOF
 
-kubectl create -f api-key.yaml
+kubectl create -f ${CHARTS_DIR}/api-key.yaml
 
 
 check_for_key=$(getGenerateAPIKey)
 
 #Get the URLS
-bas_endpoint_url=https://$(kubectl get routes bas-endpoint -n "${PROJECTNAME}" |awk 'NR==2 {print $2}')
-grafana_dashboard_url=https://$(kubectl get routes grafana-route -n "${PROJECTNAME}" |awk 'NR==2 {print $2}')
+bas_endpoint_url=https://$(kubectl get routes bas-endpoint -n ${PROJECTNAME} |awk 'NR==2 {print $2}')
+grafana_dashboard_url=https://$(kubectl get routes grafana-route -n ${PROJECTNAME} |awk 'NR==2 {print $2}')
 
 #Get the API key value and the URLs
 echo "===========API KEY=============="
