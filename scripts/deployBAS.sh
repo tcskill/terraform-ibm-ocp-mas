@@ -40,8 +40,8 @@ function getGenerateAPIKey() {
 	echo "$check_for_key"
 }
 
-#create BAS project
-kubectl create namespace bas
+#create BAS namespace project
+kubectl create namespace ${PROJECTNAME}
 
 #create operator group
 cat <<'EOF'>bas-og.yaml
@@ -76,8 +76,8 @@ EOF
 kubectl create -f bas-subscription.yaml
 
 #Create a secret named database-credentials for PostgreSQL DB and grafana-credentials for Grafana
-kubectl create secret generic database-credentials --from-literal=db_username=${dbuser} --from-literal=db_password=${dbpassword} -n "${PROJECTNAME}" 
-kubectl create secret generic grafana-credentials --from-literal=grafana_username=${grafanauser} --from-literal=grafana_password=${grafanapassword} -n "${PROJECTNAME}"
+kubectl create secret generic database-credentials --from-literal=db_username=${dbuser} --from-literal=db_password=${dbpassword} -n ${PROJECTNAME} 
+kubectl create secret generic grafana-credentials --from-literal=grafana_username=${grafanauser} --from-literal=grafana_password=${grafanapassword} -n ${PROJECTNAME}
 
 #Create the AnalyticsProxy instance
 cat <<'EOF'>analytics-proxy.yaml
