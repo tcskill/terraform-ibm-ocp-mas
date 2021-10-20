@@ -37,3 +37,59 @@ variable "mongo_serviceaccount" {
   description = "Name of the service account to use for mongo"
   default = "mongodb-kubernetes-operator"
 }
+
+variable "bas_projectName" {
+  type        = string
+  description = "Namespace to use for bas"
+  default = "masbas"
+}
+
+variable "bas_storageClassKafka" {
+  type        = string
+  description = "Namespace to use for bas"
+  default = "ibmc-vpc-block-10iops-tier"
+}
+
+variable "bas_storageClassZookeeper" {
+  type        = string
+  description = "Name for zookeeper storage class"
+  default = "ibmc-vpc-block-10iops-tier"
+}
+
+variable "bas_storageClassDB" {
+  type        = string
+  description = "Name for db storage class"
+  default = "ibmc-vpc-block-10iops-tier"
+}
+
+variable "bas_storageClassArchive" {
+  type        = string
+  description = "Name for archive storage class"
+  default = "ibmc-file-bronze-gid"
+}
+
+variable "bas_dbuser" {
+  type        = string
+  description = "bas db user name"
+  default = "dbuser"
+}
+
+variable "bas_dbpassword" {
+  type        = string
+  description = "bas db password"
+  default = ""
+}
+
+variable "bas_grafanauser" {
+  type        = string
+  description = "bas grafana user name"
+  default = "gfuser"
+}
+
+variable "bas_grafapassword" {
+  type        = string
+  description = "bas grafana password"
+  default = ""
+}
+
+
