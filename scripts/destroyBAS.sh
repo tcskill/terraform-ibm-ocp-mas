@@ -21,8 +21,10 @@ sleep 5m
 kubectl delete AnalyticsProxy analyticsproxydeployment
 kubectl delete Subscription behavior-analytics-services-operator-migrated
 kubectl delete GenerateKey bas-api-key
-kubectl delete OperatorGroup  bas-operator-group
-kubectl delete deployment postgres-operator
+kubectl delete OperatorGroup bas-operator-group
+kubectl delete Deployment postgres-operator
+kubectl delete Deployment behavior-analytics-services-operator
+kubectl delete Deployment dashboard-deployment
 kubectl delete secret database-credentials
 kubectl delete secret grafana-credentials
 kubectl delete namespace ${PROJECTNAME}
