@@ -77,7 +77,7 @@ variable "bas_dbuser" {
 variable "bas_dbpassword" {
   type        = string
   description = "bas db password"
-  default = ""
+
 }
 
 variable "bas_grafanauser" {
@@ -89,7 +89,7 @@ variable "bas_grafanauser" {
 variable "bas_grafapassword" {
   type        = string
   description = "bas grafana password"
-  default = ""
+
 }
 
 
