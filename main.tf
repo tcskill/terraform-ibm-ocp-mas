@@ -53,7 +53,7 @@ resource "null_resource" "deploy_bas" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/deployBAS.sh ${self.triggers.basprojectname} ${self.triggers.sc_archive} ${self.triggers.sc_db} ${self.triggers.sc_kafka} ${self.triggers.zookeep}"
+    command = "${path.module}/scripts/deployBAS.sh ${self.triggers.basprojectname} ${self.triggers.sc_archive} ${self.triggers.sc_db} ${self.triggers.sc_kafka} ${self.triggers.sc_zookeep}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
