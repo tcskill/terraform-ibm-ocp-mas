@@ -42,9 +42,15 @@ resource "null_resource" "deploy_cert-manager" {
 
 # BAS
 
+
+
+
+
+
 # SLS
 
 # Service Binding Operator / Catalog
+
 /*
 resource "null_resource" "deploy_catalog" {
   triggers = {
@@ -70,8 +76,4 @@ resource "null_resource" "deploy_catalog" {
 }
 
 */
-
-
-
-
 
