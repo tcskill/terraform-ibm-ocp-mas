@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 
 PROJECTNAME="$1"
+CHARTS_DIR=$(cd $(dirname $0)/../charts; pwd -P)
 
 echo "removing bas...."
 
-cat <<'EOF'>delete-db.yaml
+cat > "${CHARTS_DIR}/delete-db.yaml" << EOL
 apiVersion: bas.ibm.com/v1
 kind: DeleteCluster
 metadata:
   name: deletecluster
 spec:
   image_pull_secret: bas-images-pull-secret
-EOF
+EOL
 
-kubectl create -f delete-db.yaml
+kubectl create -f ${CHARTS_DIR}/delete-db.yaml
 
 sleep 5m
 

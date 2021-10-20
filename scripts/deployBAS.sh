@@ -46,7 +46,7 @@ kubectl create namespace ${PROJECTNAME}
 sleep 10s
 
 #create operator group
-cat <<'EOF'>${CHARTS_DIR}/bas-og.yaml
+cat > "${CHARTS_DIR}/bas-og.yaml" << EOL
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -55,12 +55,12 @@ metadata:
 spec: 
   targetNamespaces:
   - ${PROJECTNAME}
-EOF
+EOL
 
 kubectl create -f ${CHARTS_DIR}/bas-og.yaml 
 
 #create a Subscription object
-cat <<'EOF'>${CHARTS_DIR}/bas-subscription.yaml
+cat > "${CHARTS_DIR}/bas-subscription.yaml" << EOL
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -73,7 +73,7 @@ spec:
   source: certified-operators
   sourceNamespace: openshift-marketplace
   startingCSV: behavior-analytics-services-operator.${basVersion}
-EOF
+EOL
 
 kubectl create -f ${CHARTS_DIR}/bas-subscription.yaml
 
@@ -82,7 +82,7 @@ kubectl create secret generic database-credentials --from-literal=db_username=${
 kubectl create secret generic grafana-credentials --from-literal=grafana_username=${grafanauser} --from-literal=grafana_password=${grafanapassword} -n ${PROJECTNAME}
 
 #Create the AnalyticsProxy instance
-cat <<'EOF'>${CHARTS_DIR}/analytics-proxy.yaml
+cat > "${CHARTS_DIR}/analytics-proxy.yaml" << EOL
 apiVersion: bas.ibm.com/v1
 kind: AnalyticsProxy
 metadata:
@@ -111,21 +111,21 @@ spec:
     zookeeper_storage_class: ${storageClassZookeeper}
     zookeeper_storage_size: ${storageSizeZookeeper}
   env_type: ${envType}
-EOF
+EOL
 
 kubectl create -f ${CHARTS_DIR}/analytics-proxy.yaml
 #Sleep for 5 mins for the deployment
 sleep 5m
 
 #Generate an API Key to use it for authentication
-cat <<'EOF'>${CHARTS_DIR}/api-key.yaml
+cat > "${CHARTS_DIR}/api-key.yaml" << EOL
 apiVersion: bas.ibm.com/v1
 kind: GenerateKey
 metadata:
   name: bas-api-key
 spec:
   image_pull_secret: bas-images-pull-secret
-EOF
+EOL
 
 kubectl create -f ${CHARTS_DIR}/api-key.yaml
 
