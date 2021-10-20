@@ -42,6 +42,7 @@ function getGenerateAPIKey() {
 
 #create BAS namespace project
 kubectl create namespace ${PROJECTNAME}
+sleep 10s
 
 #create operator group
 cat <<'EOF'>bas-og.yaml
@@ -113,7 +114,7 @@ EOF
 
 kubectl create -f analytics-proxy.yaml
 #Sleep for 5 mins for the deployment
-sleep 120
+sleep 5m
 
 #Generate an API Key to use it for authentication
 cat <<'EOF'>api-key.yaml

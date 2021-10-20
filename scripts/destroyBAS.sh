@@ -24,7 +24,7 @@ kubectl delete OperatorGroup  bas-operator-group
 kubectl delete deployment postgres-operator
 kubectl delete secret database-credentials
 kubectl delete secret grafana-credentials
-kubectl delete project ${PROJECTNAME}
+kubectl delete namespace ${PROJECTNAME}
 
 
 #oc delete FullDeployment fulldeployment-demo
