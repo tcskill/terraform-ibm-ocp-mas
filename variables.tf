@@ -65,7 +65,7 @@ variable "bas_storageClassDB" {
 variable "bas_storageClassArchive" {
   type        = string
   description = "Name for archive storage class"
-  default = "ibmc-file-bronze-gid"
+  default = "ibmc-vpc-block-10iops-tier"
 }
 
 variable "bas_dbuser" {
