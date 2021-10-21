@@ -49,11 +49,15 @@ resource "null_resource" "deploy_bas" {
     sc_db=var.bas_storageClassDB
     sc_kafka=var.bas_storageClassKafka
     sc_zookeep=var.bas_storageClassZookeeper
+    bas_dbuser=var.bas_dbuser
+    bas_dbpassword=var.bas_dbpassword
+    bas_grafanauser=var.bas_grafanauser
+    bas_grafapassword=var.bas_grafapassword
     kubeconfig = var.cluster_config_file
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/deployBAS.sh ${self.triggers.basprojectname} ${self.triggers.sc_archive} ${self.triggers.sc_db} ${self.triggers.sc_kafka} ${self.triggers.sc_zookeep}"
+    command = "${path.module}/scripts/deployBAS.sh ${self.triggers.basprojectname} ${self.triggers.sc_archive} ${self.triggers.sc_db} ${self.triggers.sc_kafka} ${self.triggers.sc_zookeep} ${self.triggers.bas_dbuser} ${self.triggers.bas_dbpassword} ${self.triggers.bas_grafanauser} ${self.triggers.bas_grafapassword}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig

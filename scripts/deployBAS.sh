@@ -5,6 +5,11 @@ storageClassArchive="$2"
 storageClassDB="$3" 
 storageClassKafka="$4" 
 storageClassZookeeper="$5" 
+dbuser="$6"
+dbpassword="$7"
+grafanauser="$8"
+grafanapassword="$9"
+
 
 CHARTS_DIR=$(cd $(dirname $0)/../charts; pwd -P)
 
