@@ -119,8 +119,8 @@ spec:
 EOL
 
 kubectl create -f ${CHARTS_DIR}/analytics-proxy.yaml
-#Sleep for 5 mins for the deployment
-sleep 5m
+#Sleep for 50 mins for the deployment
+sleep 50m
 
 #Generate an API Key to use it for authentication
 cat > "${CHARTS_DIR}/api-key.yaml" << EOL

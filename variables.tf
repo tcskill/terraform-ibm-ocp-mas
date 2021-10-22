@@ -46,26 +46,26 @@ variable "bas_projectName" {
 
 variable "bas_storageClassKafka" {
   type        = string
-  description = "Namespace to use for bas"
+  description = "Name for kafka block storage class"
   default = "ibmc-vpc-block-10iops-tier"
 }
 
 variable "bas_storageClassZookeeper" {
   type        = string
-  description = "Name for zookeeper storage class"
+  description = "Name for zookeeper block storage class"
   default = "ibmc-vpc-block-10iops-tier"
 }
 
 variable "bas_storageClassDB" {
   type        = string
-  description = "Name for db storage class"
+  description = "Name for db block storage class"
   default = "ibmc-vpc-block-10iops-tier"
 }
 
 variable "bas_storageClassArchive" {
   type        = string
-  description = "Name for archive storage class"
-  default = "ibmc-vpc-block-10iops-tier"
+  description = "Name for archive file storage class"
+  default = "portworx-db2-rwx-sc"
 }
 
 variable "bas_dbuser" {
