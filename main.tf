@@ -40,6 +40,29 @@ resource "null_resource" "deploy_cert-manager" {
 }
 */
 
+/*
+# Service Binding Operator
+
+resource "null_resource" "patchSBO" {
+  depends_on = [
+    null_resource.deploy_catalog
+  ]
+  
+  triggers = {
+    kubeconfig = var.cluster_config_file
+  }
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/patchSBO.sh"
+
+    environment = {
+      KUBECONFIG = self.triggers.kubeconfig
+    }
+  }
+
+}
+*/
+
 # BAS
 resource "null_resource" "deploy_bas" {
   triggers = {
