@@ -20,76 +20,14 @@ variable "tls_secret_name" {
   default = ""
 }
 
-variable "mongo_namespace" {
+variable "mas_namespace" {
   type        = string
-  description = "Namespace where MongoDB is deployed"
-  default = "mongo"
+  description = "IBM entitlement key for MAS"
+  default     = "masdemo85"
 }
 
-variable "mongo_storageclass" {
+variable "mas_key" {
   type        = string
-  description = "Storageclass for MongoDB"
-  default = "ibmc-vpc-block-10iops-tier"
+  description = "IBM entitlement key for MAS"
 }
-
-variable "mongo_serviceaccount" {
-  type        = string
-  description = "Name of the service account to use for mongo"
-  default = "mongodb-kubernetes-operator"
-}
-
-variable "bas_projectName" {
-  type        = string
-  description = "Namespace to use for bas"
-  default = "masbas"
-}
-
-variable "bas_storageClassKafka" {
-  type        = string
-  description = "Name for kafka block storage class"
-  default = "ibmc-vpc-block-10iops-tier"
-}
-
-variable "bas_storageClassZookeeper" {
-  type        = string
-  description = "Name for zookeeper block storage class"
-  default = "ibmc-vpc-block-10iops-tier"
-}
-
-variable "bas_storageClassDB" {
-  type        = string
-  description = "Name for db block storage class"
-  default = "ibmc-vpc-block-10iops-tier"
-}
-
-variable "bas_storageClassArchive" {
-  type        = string
-  description = "Name for archive file storage class"
-  default = "portworx-db2-rwx-sc"
-}
-
-variable "bas_dbuser" {
-  type        = string
-  description = "bas db user name"
-  default = "dbuser"
-}
-
-variable "bas_dbpassword" {
-  type        = string
-  description = "bas db password"
-
-}
-
-variable "bas_grafanauser" {
-  type        = string
-  description = "bas grafana user name"
-  default = "gfuser"
-}
-
-variable "bas_grafapassword" {
-  type        = string
-  description = "bas grafana password"
-
-}
-
 
