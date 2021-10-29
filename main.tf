@@ -17,9 +17,6 @@ module setup_clis {
 # Service Binding Operator
 
 resource "null_resource" "patchSBO" {
-  depends_on = [
-    null_resource.deploy_catalog
-  ]
   
   triggers = {
     kubeconfig = var.cluster_config_file
@@ -47,10 +44,6 @@ resource "null_resource" "patchSBO" {
 # Create/Recreate the ibm-entitlement secret
 
 resource "null_resource" "entitlesecret" {
-  depends_on = [
-    null_resource.deploy_catalog
-
-  ]
 
   triggers = {
     mas_namespace=var.mas_namespace
