@@ -44,6 +44,9 @@ resource "null_resource" "patchSBO" {
 # Create/Recreate the ibm-entitlement secret
 
 resource "null_resource" "entitlesecret" {
+  depends_on = [
+    null_resource.patchSBO
+  ]
 
   triggers = {
     mas_namespace=var.mas_namespace
