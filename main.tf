@@ -1,6 +1,8 @@
 locals {
   bin_dir = module.setup_clis.bin_dir
   tmp_dir = "${path.cwd}/.tmp"
+  ingress_subdomain = var.cluster_ingress_hostname
+
 }
 
 
@@ -64,6 +66,27 @@ resource "null_resource" "entitlesecret" {
   provisioner "local-exec" {
     when = destroy
     command = "kubectl delete secret ibm-entitlement -n ${self.triggers.mas_namespace}"
+
+    environment = {
+      KUBECONFIG = self.triggers.kubeconfig
+    }
+  }
+
+}
+
+# Update CRDs needed
+
+resource "null_resource" "updateCRD" {
+
+  triggers = {
+    ingress=local.ingress_subdomain
+    instanceid=var.mas_instanceid
+
+    kubeconfig = var.cluster_config_file
+  }
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/updateCRD.sh ${self.triggers.instanceid} ${self.triggers.ingress}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig

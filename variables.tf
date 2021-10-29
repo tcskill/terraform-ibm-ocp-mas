@@ -31,3 +31,9 @@ variable "mas_key" {
   description = "IBM entitlement key for MAS"
 }
 
+variable "mas_instanceid" {
+  type        = string
+  description = "instance ID for MAS"
+  default     = "mas85"
+}
+
