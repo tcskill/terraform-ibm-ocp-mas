@@ -37,3 +37,8 @@ variable "mas_instanceid" {
   default     = "mas85"
 }
 
+variable "mas_version" {
+  type        = string
+  description = "version for MAS"
+  default     = "8.5.0"
+}
