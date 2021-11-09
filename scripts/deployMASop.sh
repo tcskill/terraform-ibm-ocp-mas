@@ -25,10 +25,10 @@ else
     echo "Installing ibm-mas operator..."
     sed -e "s|icr.io/cpopen|${ICR_CPOPEN}|g" \
         -e "s/{{INSTANCE_ID}}/${INSTANCE_ID}/g" \
-        $MAS_DIR/ibm-mas-${VERSION}.yaml | kubectl apply -f - || logFailureAndExit "Unable to apply ibm-mas operator"
-
+        $MAS_DIR/ibm-mas-${VERSION}.yaml 
+        #$MAS_DIR/ibm-mas-${VERSION}.yaml | kubectl apply -f - || logFailureAndExit "Unable to apply ibm-mas operator"
 fi
 
 # let the deployment finish
-sleep 4m
+#sleep 4m
 
