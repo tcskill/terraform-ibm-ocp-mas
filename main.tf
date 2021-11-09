@@ -189,7 +189,7 @@ resource "null_resource" "deployMASop" {
 
 }
 
-
+/*
 # Install IBM Maximo Application Suite core systems
 
 resource "null_resource" "deployMAScore" {
@@ -223,5 +223,5 @@ resource "null_resource" "deployMAScore" {
   }
 
 }
-
+*/
 
