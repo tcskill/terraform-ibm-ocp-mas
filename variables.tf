@@ -23,7 +23,7 @@ variable "tls_secret_name" {
 variable "mas_namespace" {
   type        = string
   description = "IBM entitlement key for MAS"
-  default     = "mas-mas85-core"
+  default     = "ibm-mas85"
 }
 
 variable "mas_key" {
