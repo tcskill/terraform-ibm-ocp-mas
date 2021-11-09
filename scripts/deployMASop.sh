@@ -17,7 +17,7 @@ INSTANCE_ID="$1"
 VERSION="$2"
 
 # Install MAS operator
-if [[ "$2" == "destroy" ]]; then
+if [[ "$3" == "destroy" ]]; then
     echo "remove ibm-mas operator..."
     kubectl delete -f $MAS_DIR/ibm-mas-${VERSION}.yaml
 
