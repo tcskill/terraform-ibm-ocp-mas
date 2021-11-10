@@ -126,7 +126,7 @@ resource "null_resource" "deployTM" {
   }
 
 }
-
+/*
 # deploy needed catalogs for operators
 resource "null_resource" "deployCatalogs" {
   depends_on = [
@@ -157,12 +157,44 @@ resource "null_resource" "deployCatalogs" {
 #delete CRB ibm-common-service-webhook-ibm-common-services
 
 }
+*/
+
+# deploy needed common services
+resource "null_resource" "deployCommon" {
+  depends_on = [
+    null_resource.deployTM
+  ]
+
+  triggers = {
+    mas_namespace=local.mas_namespace
+    kubeconfig = var.cluster_config_file
+  }
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/deployCommon.sh"
+
+    environment = {
+      KUBECONFIG = self.triggers.kubeconfig
+    }
+  }
+
+    provisioner "local-exec" {
+    when = destroy
+    command = "${path.module}/scripts/deployCommon.sh destroy"
+
+    environment = {
+      KUBECONFIG = self.triggers.kubeconfig
+    }
+  }
+}
+
+
 
 # Install IBM Maximo Application Suite operator
 
 resource "null_resource" "deployMASop" {
   depends_on = [
-    null_resource.deployCatalogs
+    null_resource.deployCommon
   ]
 
   triggers = {
