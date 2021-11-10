@@ -19,16 +19,16 @@ VERSION="$2"
 # Install MAS operator
 if [[ "$3" == "destroy" ]]; then
     echo "remove ibm-mas operator..."
-    #kubectl delete -f $MAS_DIR/my-ibm-mas-${VERSION}.yaml
+    kubectl delete -f $MAS_DIR/my-ibm-mas-${VERSION}.yaml
 
 else 
     echo "Installing ibm-mas operator..."
     sed -e "s|icr.io/cpopen|${ICR_CPOPEN}|g" \
         -e "s/{{INSTANCE_ID}}/${INSTANCE_ID}/g" \
         $MAS_DIR/ibm-mas-${VERSION}.yaml > $MAS_DIR/my-ibm-mas-${VERSION}.yaml
-        #$MAS_DIR/ibm-mas-${VERSION}.yaml | kubectl apply -f - || logFailureAndExit "Unable to apply ibm-mas operator"
+    kubectl apply -f $MAS_DIR/my-ibm-mas-${VERSION}.yaml
 fi
 
 # let the deployment finish
-#sleep 4m
+sleep 4m
 
