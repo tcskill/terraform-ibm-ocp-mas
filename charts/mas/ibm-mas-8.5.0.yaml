@@ -6527,6 +6527,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ibm-mas-operator
+  namespace: mas-{{INSTANCE_ID}}-core
 spec:
   selector:
     matchLabels:
