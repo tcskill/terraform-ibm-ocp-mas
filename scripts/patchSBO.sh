@@ -2,7 +2,7 @@
 
 if [[ "$1" == "destroy" ]]; then
     echo "remove sbo ..."
-    CSV=kubectl get subscription rh-service-binding-operator -n openshift-operators -o jsonpath="{.status.installedCSV}"
+    CSV=$(kubectl get subscription rh-service-binding-operator -n openshift-operators -o jsonpath="{.status.installedCSV}")
     kubectl delete ClusterServiceVersion ${CSV} -n openshift-operators
 else 
     echo "create sbo..."
