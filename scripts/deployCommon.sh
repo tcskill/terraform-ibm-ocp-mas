@@ -14,13 +14,10 @@ if [[ "$1" == "destroy" ]]; then
     kubectl delete CommonService common-service -n ibm-common-services
     kubectl delete ClusterServiceVersion ibm-common-service-operator.v3.13.0 -n ibm-common-services
     kubectl delete Deployment ibm-common-service-webhook -n ibm-common-services
-    kubectl delete Deployment secretshare -n ibm-common-service
+    
     kubectl delete ConfigMap ibm-cpp-config -n ibm-common-services
     kubectl delete ConfigMap ibm-cs-operator-webhook-ca -n ibm-common-services
-    kubectl delete ConfigMap ibm-licensing-annotations  -n ibm-common-services
-    kubectl delete ConfigMap ibm-licensing-cloudpaks -n ibm-common-services
-    kubectl delete ConfigMap ibm-licensing-config -n ibm-common-services
-    kubectl delete ConfigMap ibm-licensing-products -n ibm-common-services
+
     kubectl delete Service ibm-common-service-webhook -n ibm-common-services
     kubectl delete namespace ibm-common-services
 
