@@ -4,6 +4,7 @@ if [[ "$1" == "destroy" ]]; then
     echo "remove sbo ..."
     CSV=$(kubectl get subscription rh-service-binding-operator -n openshift-operators -o jsonpath="{.status.installedCSV}")
     kubectl delete ClusterServiceVersion ${CSV} -n openshift-operators
+    installplan=$(kubectl get installplan -n openshift-operators | grep -i service-binding-operator.v0.8.0 | awk '{print $1}'); kubectl delete InstallPlan ${installplan} -n openshift-operators
 else 
     echo "create sbo..."
     CHARTS_DIR=$(cd $(dirname $0)/../charts; pwd -P)
