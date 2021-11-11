@@ -126,38 +126,6 @@ resource "null_resource" "deployTM" {
   }
 
 }
-/*
-# deploy needed catalogs for operators
-resource "null_resource" "deployCatalogs" {
-  depends_on = [
-    null_resource.deployTM
-  ]
-
-  triggers = {
-    mas_namespace=local.mas_namespace
-    kubeconfig = var.cluster_config_file
-  }
-
-  provisioner "local-exec" {
-    command = "kubectl apply -f ${path.module}/charts/ibm-catalogs.yaml"
-
-    environment = {
-      KUBECONFIG = self.triggers.kubeconfig
-    }
-  }
-
-    provisioner "local-exec" {
-    when = destroy
-    command = "kubectl delete -f ${path.module}/charts/ibm-catalogs.yaml"
-
-    environment = {
-      KUBECONFIG = self.triggers.kubeconfig
-    }
-  }
-#delete CRB ibm-common-service-webhook-ibm-common-services
-
-}
-*/
 
 # deploy needed common services
 resource "null_resource" "deployCommon" {
