@@ -22,8 +22,14 @@ variable "tls_secret_name" {
 
 variable "mas_namespace" {
   type        = string
-  description = "IBM entitlement key for MAS"
+  description = "Namespace for MAS Core"
   default     = "mas-mas85-core"
+}
+
+variable "mas_ics_namespace" {
+  type        = string
+  description = "Namespace for IBM Common Services (ibm-common-services is recommended)"
+  default     = "ibm-common-services"
 }
 
 variable "mas_key" {

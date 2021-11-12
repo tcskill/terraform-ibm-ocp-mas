@@ -134,12 +134,12 @@ resource "null_resource" "deployCommon" {
   ]
 
   triggers = {
-    mas_namespace=local.mas_namespace
+    ics_namespace=var.mas_ics_namespace
     kubeconfig = var.cluster_config_file
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/deployCommon.sh"
+    command = "${path.module}/scripts/deployCommon.sh ${self.triggers.ics_namespace}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
@@ -148,7 +148,7 @@ resource "null_resource" "deployCommon" {
 
     provisioner "local-exec" {
     when = destroy
-    command = "${path.module}/scripts/deployCommon.sh destroy"
+    command = "${path.module}/scripts/deployCommon.sh ${self.triggers.ics_namespace} destroy"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
