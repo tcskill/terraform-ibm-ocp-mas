@@ -1,11 +1,8 @@
 name: MAS
 type: terraform
-description: Module to install MAS
+description: Module to install Maximo Application Suite
 tags:
     - tools
-    - devops
-    - quality gate
-    - lint
 versions:
 - platforms:
     - ocp4
