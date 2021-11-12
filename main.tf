@@ -1,22 +1,9 @@
 locals {
-  bin_dir = module.setup_clis.bin_dir
   tmp_dir = "${path.cwd}/.tmp"
   ingress_subdomain = var.cluster_ingress_hostname
   mas_namespace = var.mas_namespace
   instanceid=var.mas_instanceid
-
 }
-
-
-module setup_clis {
-  source = "github.com/cloud-native-toolkit/terraform-util-clis.git"
-
-  clis = ["helm"]
-}
-
-##
-# Setup Preq's before MAS core
-##
 
 # Service Binding Operator
 
@@ -42,7 +29,6 @@ resource "null_resource" "patchSBO" {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
 
 # Create/Recreate the ibm-entitlement secret
@@ -73,7 +59,6 @@ resource "null_resource" "entitlesecret" {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
 
 # Update CRDs needed
@@ -94,10 +79,9 @@ resource "null_resource" "updateCRD" {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
 
-# deploy truststore manager
+# Deploy truststore manager
 resource "null_resource" "deployTM" {
   depends_on = [
     null_resource.updateCRD
@@ -124,10 +108,9 @@ resource "null_resource" "deployTM" {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
 
-# deploy needed common services
+# Deploy needed common services
 resource "null_resource" "deployCommon" {
   depends_on = [
     null_resource.deployTM
@@ -155,8 +138,6 @@ resource "null_resource" "deployCommon" {
     }
   }
 }
-
-
 
 # Install IBM Maximo Application Suite operator
 
@@ -187,9 +168,7 @@ resource "null_resource" "deployMASop" {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
-
 
 # Install IBM Maximo Application Suite core systems
 
@@ -216,13 +195,10 @@ resource "null_resource" "deployMAScore" {
 
     provisioner "local-exec" {
     when = destroy
-    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} ${self.triggers.instanceid} ${self.triggers.ingress} destroy"
+    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} null null destroy"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
     }
   }
-
 }
-
-

@@ -21,7 +21,23 @@ versions:
     - id: namespace
       refs:
         - source: github.com/ibm-garage-cloud/terraform-k8s-namespace
-          version: ">= 2.1.0"
+          version: ">= 1.0.0"
+    - id: certmgr
+    refs:
+      - source: github.com/cloud-native-toolkit/terraform-ocp-certmanager
+        version: ">= 1.0.0" 
+    - id: mongodb
+    refs:
+      - source: github.com/cloud-native-toolkit/terraform-ocp-mongodb
+        version: ">= 1.0.0" 
+    - id: bas
+    refs:
+      - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-bas
+        version: ">= 1.0.0" 
+     - id: sls
+    refs:
+      - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-sls
+        version: ">= 1.0.0"                          
   variables:
     - name: cluster_type
       moduleRef:
