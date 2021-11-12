@@ -10,14 +10,11 @@ if [[ "$1" == "destroy" ]]; then
     kubectl delete NamespaceScope nss-managedby-odlm -n ibm-common-services
     kubectl delete NamespaceScope nss-odlm-scope -n ibm-common-services
     kubectl delete NamespaceScope odlm-scope-managedby-odlm -n ibm-common-services
-    kubectl delete ClusterServiceVersion ibm-namespace-scope-operator.v1.7.0 -n ibm-common-services
     kubectl delete CommonService common-service -n ibm-common-services
     kubectl delete ClusterServiceVersion ibm-common-service-operator.v3.13.0 -n ibm-common-services
     kubectl delete Deployment ibm-common-service-webhook -n ibm-common-services
-    
     kubectl delete ConfigMap ibm-cpp-config -n ibm-common-services
     kubectl delete ConfigMap ibm-cs-operator-webhook-ca -n ibm-common-services
-
     kubectl delete Service ibm-common-service-webhook -n ibm-common-services
     kubectl delete namespace ibm-common-services
 
