@@ -25,8 +25,7 @@ else
     CHARTS_DIR=$(cd $(dirname $0)/../charts; pwd -P)
     
     echo "Installing ibm-mas operator..."
-    sed -e "s/{{ICSNAMESPACE}}/${ICSNAMESP}/g" \
-        $CHARTS_DIR/ibm-common.yaml > $MAS_DIR/my-ibm-common.yaml
+    sed -e "s/{{ICSNAMESPACE}}/${ICSNAMESP}/g" ${CHARTS_DIR}/ibm-common.yaml > ${CHARTS_DIR}/my-ibm-common.yaml
     
     kubectl apply -f  "${CHARTS_DIR}/my-ibm-common.yaml"
     sleep 1m
