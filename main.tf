@@ -181,12 +181,16 @@ resource "null_resource" "deployMAScore" {
     mas_namespace=local.mas_namespace
     instanceid=local.instanceid
     ingress=local.ingress_subdomain
+    certmgr_nsp=var.certmgr_namespace
+    mongo_nsp=var.mongo_namespace
+    bas_nsp=var.bas_namespace
+    sls_nsp=var.sls_namespace
 
     kubeconfig = var.cluster_config_file
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} ${self.triggers.instanceid} ${self.triggers.ingress}"
+    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} ${self.triggers.instanceid} ${self.triggers.ingress} ${self.triggers.certmgr_nsp} ${self.triggers.mongo_nsp} ${self.triggers.bas_nsp} ${self.triggers.sls_nsp}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
@@ -195,7 +199,7 @@ resource "null_resource" "deployMAScore" {
 
     provisioner "local-exec" {
     when = destroy
-    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} null null destroy"
+    command = "${path.module}/scripts/deployMAScore.sh ${self.triggers.mas_namespace} null null null null null null destroy"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig

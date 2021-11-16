@@ -48,3 +48,28 @@ variable "mas_version" {
   description = "version for MAS"
   default     = "8.5.0"
 }
+
+variable "certmgr_namespace" {
+  type        = string
+  description = "Namespace for cert-mgr"
+  
+}
+
+variable "mongo_namespace" {
+  type        = string
+  description = "Namespace for Mongo"
+
+}
+
+variable "bas_namespace" {
+  type        = string
+  description = "Namespace for BAS"
+
+}
+
+variable "sls_namespace" {
+  type        = string
+  description = "Namespace for SLS"
+
+}
+
