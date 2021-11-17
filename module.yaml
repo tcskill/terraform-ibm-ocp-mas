@@ -52,3 +52,20 @@ versions:
       moduleRef:
         id: cluster
         output: platform.tls_secret
+    - name: certmgr_namespace
+      moduleRef:
+        id: certmgr
+        output: cert_namespace
+    - name: bas_namespace
+      moduleRef:
+        id: bas
+        output: bas_namespace
+    - name: sls_namespace
+      moduleRef:
+        id: sls
+        output: sls_namespace
+    - name: mongo_namespace
+      moduleRef:
+        id: mongo
+        output: mongo_namespace
+        
