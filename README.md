@@ -40,7 +40,7 @@ modules can help provide the required information:
 
 ## Suggested instructions to use
 
-Create the following in a new directory on your filesystem:
+Copy the files from the sample directory in this repo to your local file system and edit as appropriate.  Rename the terraform.tfvars.template to terraform.tfvars.
 
 - stages.tf : this will include all the modules that are needed and will be built.  At a minimum you will need information about the cluster (from a cluster module), and any of the above module dependencies that are not already installed on the cluster.  Include all those in the stages.tf
 

@@ -1,0 +1,20 @@
+
+region="us-east"
+resource_group_name="<resource group>"
+name_prefix=""
+
+cluster_name="<your cluster name>"
+worker_count=6
+ocp_version="4.6"
+cluster_exists=true
+cluster_flavor="bx2.16x64"
+cluster_vpc_name=""
+cluster_vpc_subnet_count=1
+cluster_login=false
+
+mysls_key="<insert your sls registry entitlement key here>"
+mymas_key = "<insert your mas registry entitlement key here>"
+
+mybas_dbpassword="changeMEdb"
+mybas_grafapassword="changeMEgr"
+

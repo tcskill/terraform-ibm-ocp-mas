@@ -40,11 +40,12 @@ resource "null_resource" "entitlesecret" {
 
   triggers = {
     mas_namespace=var.mas_namespace
+    maskey=var.mas_key
     kubeconfig = var.cluster_config_file
   }
 
   provisioner "local-exec" {
-    command = "kubectl create secret docker-registry ibm-entitlement --docker-server=cp.icr.io --docker-username='cp' --docker-password=${var.mas_key} -n ${self.triggers.mas_namespace}"
+    command = "kubectl create secret docker-registry ibm-entitlement --docker-server=cp.icr.io --docker-username='cp' --docker-password=${self.triggers.maskey} -n ${self.triggers.mas_namespace}"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
