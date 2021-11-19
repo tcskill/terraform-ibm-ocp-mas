@@ -56,7 +56,7 @@ module "sls_namespace" {
 }
 
 module "sls" {
-  source = "github.com/tcskill/terraform-ibm-ocp-sls-test"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-sls"
 
   cluster_config_file      = module.cluster.config_file_path
   cluster_type             = module.cluster.platform.type_code
@@ -73,7 +73,7 @@ module "sls" {
 }
 
 module "masbas" {
-  source = "github.com/tcskill/terraform-ibm-ocp-bas-test"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-bas"
 
   cluster_config_file      = module.cluster.config_file_path
   cluster_type             = module.cluster.platform.type_code
@@ -94,7 +94,7 @@ module "mas_namespace" {
 }
 
 module "mas85" {
-  source = "github.com/tcskill/terraform-ibm-mas-test"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-mas"
 
   cluster_config_file      = module.cluster.config_file_path
   cluster_type             = module.cluster.platform.type_code

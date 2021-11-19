@@ -68,14 +68,14 @@ https://admin.${YourDomainURL}/initialsetup
 
 NOTE: Depending on the browser you may have to import the self-signed certificate into your keystore (if on a mac)
 
-Login as super user with credential found here: <yourmasInstanceID>-credentials-superuser
+Login as super user with credential found in the secret named: yourmasInstanceID-credentials-superuser
 
 
 ## Example module usage
 
 ```hcl-terraform
 module "mas" {
-  source = "github.com/ibm-garage-cloud/terraform-ibm-ocp-mas"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-mas"
 
   cluster_config_file      = module.cluster.config_file_path
   cluster_type             = module.cluster.platform.type_code
