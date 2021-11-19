@@ -22,11 +22,11 @@ versions:
     - id: certmgr
     refs:
       - source: github.com/cloud-native-toolkit/terraform-ocp-certmanager
-        version: ">= 1.0.0" 
+        version: ">= 1.0.1" 
     - id: mongodb
     refs:
       - source: github.com/cloud-native-toolkit/terraform-ocp-mongodb
-        version: ">= 1.0.0" 
+        version: ">= 1.2.0" 
     - id: bas
     refs:
       - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-bas
