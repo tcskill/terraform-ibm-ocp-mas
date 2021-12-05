@@ -27,11 +27,11 @@ versions:
       refs:
         - source: github.com/cloud-native-toolkit/terraform-ocp-mongodb
           version: ">= 1.2.0" 
-      - id: bas
+    - id: bas
       refs:
         - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-bas
           version: ">= 1.0.0" 
-      - id: sls
+    - id: sls
       refs:
         - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-sls
           version: ">= 1.0.0"                          
